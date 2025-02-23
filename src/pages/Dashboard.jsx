@@ -3,16 +3,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { db } from "../../firebase.config"
-import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
-// Dashboard.jsx
-import useAuthStore from '../store/authStore'; // Ensure this is the correct path
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, where, query } from "firebase/firestore"; 
+import useAuthStore from '../store/authStore'; 
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Navbar from "../components/Navbar";
 
 console.log(db)
 
-// Zod schema for task validation
 const taskSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().optional(),
@@ -58,20 +56,24 @@ const Dashboard = () => {
 
   // Fetch tasks from Firestore
   const fetchTasks = async () => {
-  
-    
     setLoading(true);
     try {
-      const snapshot = await getDocs(tasksCollection);
-      const tasksData = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setTasks(tasksData);
+        if (user) { // Check if user is logged in
+            const q = query(tasksCollection, where("createdBy", "==", user.uid)); // Create a query
+            const snapshot = await getDocs(q); // Use the query to fetch tasks
+            const tasksData = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+            setTasks(tasksData);
+        } else {
+            // Handle the case where the user is not logged in.  For example:
+            setTasks([]); // Clear tasks or display a message
+            console.log("User not logged in. No tasks to fetch.");
+        }
     } catch (error) {
-      console.error("Error fetching tasks:", error);
+        console.error("Error fetching tasks:", error);
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
-
+};
   // Fetch logs from Firestore
   const fetchLogs = async () => {
     try {
