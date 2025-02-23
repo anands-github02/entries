@@ -77,20 +77,21 @@ const Dashboard = () => {
   // Fetch logs from Firestore
   const fetchLogs = async () => {
     try {
-        if (user) { // Check if user is logged in
-            const q = query(logsCollection, where("userId", "==", user.uid)); // Query by userId
-            const snapshot = await getDocs(q);
-            const logsData = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-            logsData.sort((a, b) => b?.timestamp?.toDate() - a?.timestamp?.toDate()); // Sort
-            setLogs(logsData);
-        } else {
-            setLogs([]); // Or handle the unauthenticated case as needed
-            console.log("User not logged in. No logs to fetch.");
-        }
+      if (user) {
+        const q = query(logsCollection, where("userId", "==", user.uid));
+        const snapshot = await getDocs(q);
+        console.log("Logs snapshot:", snapshot.docs.map(doc => doc.data()));
+        const logsData = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        logsData.sort((a, b) => b?.timestamp?.toDate() - a?.timestamp?.toDate());
+        setLogs(logsData);
+      } else {
+        setLogs([]);
+        console.log("User not logged in. No logs to fetch.");
+      }
     } catch (error) {
-        console.error("Error fetching logs:", error);
+      console.error("Error fetching logs:", error);
     }
-};
+  };
 
   // Log activity to Firestore
   const logActivity = async (message) => {
@@ -98,7 +99,8 @@ const Dashboard = () => {
       const logEntry = {
         message,
         timestamp: new Date(),
-        updatedBy: user?.name || user?.email, // Use displayName or email as the user identifier
+        updatedBy: user?.name || user?.email,
+        userId: user?.uid, // Ensure userId is set
       };
       await addDoc(logsCollection, logEntry);
       fetchLogs(); // Refresh logs after adding a new one
