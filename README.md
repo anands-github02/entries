@@ -1,105 +1,88 @@
-Task Management Application
+# Task Management Application
 
 A React-based Task Management Application that allows users to create, update, delete, and organize tasks using a drag-and-drop interface. The app integrates with Firebase for authentication and data storage, and uses Zustand for state management.
 
-Features
+## Features
 
-User Authentication:
+### User Authentication
+- Sign up, sign in, and log out.
+- Protected routes for authenticated users.
 
-Sign up, sign in, and log out.
+### Task Management
+- Create tasks with a title, description, due date, priority, and status.
+- Update or delete existing tasks.
+- Drag-and-drop tasks between columns (To Do, In Progress, Done).
 
-Protected routes for authenticated users.
+### Filtering and Sorting
+- Filter tasks by status and priority.
+- Sort tasks alphabetically (ascending or descending).
 
-Task Management:
+### Activity Logs
+- Track all user activities (e.g., task creation, updates, deletions).
 
-Create tasks with a title, description, due date, priority, and status.
+### Responsive Design
+- Works seamlessly on desktop and mobile devices.
 
-Update or delete existing tasks.
+## Technologies Used
 
-Drag-and-drop tasks between columns (To Do, In Progress, Done).
+### Frontend
+- React
+- React Router (for routing)
+- React DnD (for drag-and-drop functionality)
+- Zustand (for state management)
+- Tailwind CSS (for styling)
 
-Filtering and Sorting:
+### Backend
+- Firebase Authentication (for user authentication)
+- Firebase Firestore (for database)
 
-Filter tasks by status and priority.
-
-Sort tasks alphabetically (ascending or descending).
-
-Activity Logs:
-
-Track all user activities (e.g., task creation, updates, deletions).
-
-Responsive Design:
-
-Works seamlessly on desktop and mobile devices.
-
-Technologies Used
-
-Frontend:
-
-React
-
-React Router (for routing)
-
-React DnD (for drag-and-drop functionality)
-
-Zustand (for state management)
-
-Tailwind CSS (for styling)
-
-Backend:
-
-Firebase Authentication (for user authentication)
-
-Firebase Firestore (for database)
-
-Getting Started
+## Getting Started
 
 Follow these steps to set up and run the application locally.
 
-Prerequisites
+### Prerequisites
+- Node.js (v16 or higher)
+- npm (v8 or higher)
+- Firebase project (for authentication and Firestore)
 
-Node.js (v16 or higher)
+### Installation
 
-npm (v8 or higher)
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/anands-github02/entries
+    cd entries
+    ```
 
-Firebase project (for authentication and Firestore)
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
 
-Installation
+3. Set up Firebase:
+    - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/).
+    - Add a web app to your Firebase project and copy the configuration object.
+    - Create a `.env` file in the root directory and add your Firebase configuration:
+      ```env
+      REACT_APP_FIREBASE_API_KEY=your-api-key
+      REACT_APP_FIREBASE_AUTH_DOMAIN=your-auth-domain
+      REACT_APP_FIREBASE_PROJECT_ID=your-project-id
+      REACT_APP_FIREBASE_STORAGE_BUCKET=your-storage-bucket
+      REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
+      REACT_APP_FIREBASE_APP_ID=your-app-id
+      REACT_APP_FIREBASE_MEASUREMENT_ID=your-measurement-id
+      ```
 
-Clone the repository:
+4. Run the application:
+    ```bash
+    npm run dev
+    ```
 
-git clone https://github.com/anands-github02/entries
-cd task-management-app
+    The app will be available at [http://localhost:5173](http://localhost:5173).
 
-Install dependencies:
+## Folder Structure
 
-npm install
-
-Set up Firebase:
-
-Create a Firebase project at Firebase Console.
-
-Add a web app to your Firebase project and copy the configuration object.
-
-Create a .env file in the root directory and add your Firebase configuration:
-
-REACT_APP_FIREBASE_API_KEY=your-api-key
-REACT_APP_FIREBASE_AUTH_DOMAIN=your-auth-domain
-REACT_APP_FIREBASE_PROJECT_ID=your-project-id
-REACT_APP_FIREBASE_STORAGE_BUCKET=your-storage-bucket
-REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
-REACT_APP_FIREBASE_APP_ID=your-app-id
-REACT_APP_FIREBASE_MEASUREMENT_ID=your-measurement-id
-
-Run the application:
-
-npm run dev
-
-The app will be available at http://localhost:5173.
-
-Folder Structure
-
-task-management-app/
+```
+entries/
 ├── public/                  # Static assets
 ├── src/
 │   ├── components/          # Reusable components (e.g., TaskCard, TaskColumn)
@@ -112,77 +95,83 @@ task-management-app/
 ├── .gitignore               # Files to ignore in Git
 ├── package.json             # Project dependencies
 └── README.md                # Project documentation
+```
 
-Available Scripts
+## Available Scripts
 
-Start the development server:
+### Start the development server:
 
+```bash
 npm run dev
+```
 
-Build the project for production:
+### Build the project for production:
 
+```bash
 npm run build
+```
 
-Testing
+## Testing
 
 The application includes unit tests for components, state management, and Firebase interactions. To run the tests:
 
+```bash
 npm test
+```
 
-Deployment
+## Deployment
 
 To deploy the application, follow these steps:
 
-Build the project:
+### Build the project:
 
+```bash
 npm run build
+```
 
-Deploy the build folder to your preferred hosting service (e.g., Firebase Hosting).
+### Deploy the build folder to your preferred hosting service (e.g., Firebase Hosting).
 
-Firebase Hosting Example:
+#### Firebase Hosting Example:
 
+```bash
 firebase init hosting
 firebase deploy
+```
 
-Contributing
+## Contributing
 
 Contributions are welcome! Follow these steps to contribute:
 
-Fork the repository.
+1. Fork the repository.
+2. Create a new branch:
+    ```bash
+    git checkout -b feature/your-feature-name
+    ```
+3. Commit your changes:
+    ```bash
+    git commit -m "Add your feature"
+    ```
+4. Push to the branch:
+    ```bash
+    git push origin feature/your-feature-name
+    ```
+5. Open a pull request.
 
-Create a new branch:
 
-git checkout -b feature/your-feature-name
+## Acknowledgments
 
-Commit your changes:
+- Firebase for backend services.
+- React DnD for drag-and-drop functionality.
+- Zustand for state management.
 
-git commit -m "Add your feature"
+## Live Preview
 
-Push to the branch:
+[Live Demo](https://entries-1d96b.web.app/dashboard)
 
-git push origin feature/your-feature-name
-
-Open a pull request.
-
-License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-Acknowledgments
-
-Firebase for backend services.
-
-React DnD for drag-and-drop functionality.
-
-Zustand for state management.
-
-Live Preview
-
-Live Demo
-
-Contact
+## Contact
 
 For questions or feedback, feel free to reach out:
 
-Sachidananda📧 Email: mgsachidananda@gmail.com🐙 GitHub: anands-github02
-
+- **Sachidananda**
+  - 📧 Email: [mgsachidananda@gmail.com](mailto:mgsachidananda@gmail.com)
+  - 🐙 GitHub: [anands-github02](https://github.com/anands-github02)
